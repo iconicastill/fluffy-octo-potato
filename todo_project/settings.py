@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-secret-key'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['app.iconicastill.com', 'https://fluffy-octo-potato.onrender.com']
+ALLOWED_HOSTS = ['app.iconicastill.com', 'fluffy-octo-potato.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
