@@ -1,14 +1,10 @@
 # Proyecto Django de Nicolás
 
-Este es un proyecto web desarrollado con Django, el framework de desarrollo web en Python. El objetivo de este proyecto es [describir brevemente qué hace: por ejemplo, "gestionar tareas", "crear un blog", "administrar residentes", etc.].
+Este es un proyecto web desarrollado con Django, el framework de desarrollo web en Python. El objetivo de este proyecto es gestionar tareas.
 
 ## Características
 
-- Autenticación de usuarios
-- Panel de administración
-- Modelos y migraciones
-- Formularios personalizados
-- Diseño modular y reutilizable
+- Crear entradas.
 
 ## Requisitos
 
