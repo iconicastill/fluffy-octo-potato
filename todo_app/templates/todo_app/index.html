@@ -33,9 +33,6 @@
 </header>
 
 <div class="container mt-5">
-    <div class="row">
-        
-        <div class="col-md-6 mb-4">
             <h1 class="mb-4 text-center">Mi Lista de Tareas</h1>
             <form method="POST" class="d-flex mb-4">
                 {% csrf_token %}
@@ -53,32 +50,6 @@
                     </li>
                 {% endfor %}
             </ul>
-        </div>
-
-        <div class="col-md-6 mb-4">
-            <h1 class="mb-4 text-center">Formulario de Contacto</h1>
-            <form method="POST" action="{% url 'contacto' %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono">
-                </div>
-                <div class="mb-3">
-                    <label for="mensaje" class="form-label">Mensaje</label>
-                    <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">ENVIAR</button>
-            </form>
-        </div>
-    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
