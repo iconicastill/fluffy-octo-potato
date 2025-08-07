@@ -10,4 +10,5 @@ urlpatterns = [
     # Nuevas URLs para el formulario de contacto
     path('get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
     path('contacto/', views.contacto, name='contacto'),
+    path('mensajes/', views.ver_mensajes, name='ver_mensajes'),
 ]
