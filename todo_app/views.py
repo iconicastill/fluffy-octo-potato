@@ -10,23 +10,26 @@ def get_csrf_token(request):
 
 @csrf_protect
 def contacto(request):
-    # This view still handles the POST request from the external form
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        email = request.POST.get('email')
-        telefono = request.POST.get('telefono')
-        mensaje = request.POST.get('mensaje')
+        try:
+            data = json.loads(request.body)
+            nombre = data.get('nombre')
+            email = data.get('email')
+            telefono = data.get('telefono')
+            mensaje = data.get('mensaje')
 
-        Contacto.objects.create(
-            nombre=nombre,
-            email=email,
-            telefono=telefono,
-            mensaje=mensaje
-        )
-        return JsonResponse({'status': 'success', 'message': 'Mensaje recibido. ¡Gracias!'})
+            Contacto.objects.create(
+                nombre=nombre,
+                email=email,
+                telefono=telefono,
+                mensaje=mensaje
+            )
+            return JsonResponse({'status': 'success', 'message': 'Mensaje recibido. ¡Gracias!'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
-    return HttpResponse("Este endpoint solo acepta peticiones POST.")
-
+    return JsonResponse({'error': 'Este endpoint solo acepta peticiones POST.'}, status=405)
+    
 def ver_mensajes(request):
     # This is the new view for reading messages
     mensajes = Contacto.objects.all().order_by('-fecha_envio')
