@@ -78,5 +78,5 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://iconicastill.com",
+    'https://iconicastill.com'
 ]
