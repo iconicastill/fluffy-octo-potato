@@ -3,6 +3,7 @@ from .models import Task, Contacto # Importa el nuevo modelo
 from django.middleware.csrf import get_token
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_protect
+import json
 
 def get_csrf_token(request):
     token = get_token(request)
