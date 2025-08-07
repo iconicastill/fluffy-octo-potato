@@ -77,6 +77,9 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = ['https://iconicastill.com']
 CSRF_TRUSTED_ORIGINS = ['https://iconicastill.com']
 
+# Seguridad CSRF
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = False  # Solo si necesitas acceder al token desde JavaScript
 CSRF_TRUSTED_ORIGINS = [
     'https://iconicastill.com'
 ]
