@@ -76,3 +76,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CSRF_TRUSTED_ORIGINS = [
     'https://iconicastill.com'
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://iconicastill.com",
+]
