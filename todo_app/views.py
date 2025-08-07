@@ -1,12 +1,33 @@
 from django.shortcuts import render, redirect
-from .models import Task
+from .models import Task, Contacto # Importa el nuevo modelo
 from django.middleware.csrf import get_token
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_protect
 
 def get_csrf_token(request):
     token = get_token(request)
     return JsonResponse({'csrf_token': token})
 
+@csrf_protect
+def contacto(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        email = request.POST.get('email')
+        telefono = request.POST.get('telefono')
+        mensaje = request.POST.get('mensaje')
+
+        # Guarda los datos en el nuevo modelo Contacto
+        Contacto.objects.create(
+            nombre=nombre,
+            email=email,
+            telefono=telefono,
+            mensaje=mensaje
+        )
+        return JsonResponse({'status': 'success', 'message': 'Mensaje recibido. ¡Gracias!'})
+
+    return HttpResponse("Este endpoint solo acepta peticiones POST.")
+
+# Las vistas de Task se mantienen
 def index(request):
     tasks = Task.objects.all()
     if request.method == "POST":
