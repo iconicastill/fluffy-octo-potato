@@ -85,10 +85,14 @@ SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_HTTPONLY = False  # Solo si necesitas acceder al token desde JavaScript
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://iconicastill.com'
+    'https://iconicastill.com',
+    'https://app.iconicastill.com'
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://iconicastill.com'
+    'https://iconicastill.com',
+    'https://app.iconicastill.com'
 ]
+
