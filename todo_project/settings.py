@@ -71,4 +71,6 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://iconicastill.com'
+]
