@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrar Mensajes</title>
+</head>
+<body>
+    <h1>Mensajes de Contacto (Administración)</h1>
+    
+    <a href="{% url 'index' %}">Volver a la página de inicio</a>
+    
+    <ul>
+    {% for mensaje in mensajes %}
+        <li style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>De: {{ mensaje.nombre }}</h3>
+            <p><strong>Correo:</strong> {{ mensaje.email }}</p>
+            {% if mensaje.telefono %}<p><strong>Teléfono:</strong> {{ mensaje.telefono }}</p>{% endif %}
+            <p><strong>Mensaje:</strong> {{ mensaje.mensaje }}</p>
+            <p><strong>Estado:</strong> {% if mensaje.leido %}✅ Leído{% else %}❌ No leído{% endif %}</p>
+            <p><em>Enviado el {{ mensaje.fecha_envio|date:"d M Y \a \l\a\s H:i" }}</em></p>
+            
+            <a href="{% url 'marcar_como_leido' mensaje.pk %}">Marcar como Leído</a> | 
+            <a href="{% url 'mensaje_borrar' mensaje.pk %}">Borrar</a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
