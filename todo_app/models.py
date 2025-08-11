@@ -15,5 +15,18 @@ class Contacto(models.Model):
     mensaje = models.TextField()
     fecha_envio = models.DateTimeField(auto_now_add=True)
 
+     # Nuevo campo para marcar el mensaje como leído
+    leido = models.BooleanField(default=False)
+    
+    # Nuevo campo para vincular respuestas al mensaje original
+    # Es un ForeignKey a sí mismo, permitiendo crear un hilo de conversación.
+    respuesta_a = models.ForeignKey(
+        'self', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='respuestas'
+    )
+
     def __str__(self):
         return f"Mensaje de {self.nombre}"
