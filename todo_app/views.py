@@ -8,8 +8,28 @@ from django.middleware.csrf import get_token
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_protect
 import json
+#login
+from django.contrib.auth.decorators import login_required
 
 # Tus vistas existentes
+
+#login
+@login_required
+def admin_mensajes(request):
+    mensajes = Contacto.objects.all().order_by('-fecha_envio')
+    return render(request, 'todo_app/admin_mensajes.html', {'mensajes': mensajes})
+
+@login_required
+def marcar_como_leido(request, pk):
+    """
+    Marca un mensaje de contacto específico como leído y redirige a la página de administración.
+    """
+    mensaje = get_object_or_404(Contacto, pk=pk)
+    if not mensaje.leido:
+        mensaje.leido = True
+        mensaje.save()
+    return redirect('admin_mensajes')
+    
 # =======================================================
 def get_csrf_token(request):
     token = get_token(request)
