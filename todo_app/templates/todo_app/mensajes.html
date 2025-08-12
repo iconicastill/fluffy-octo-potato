@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mensajes de Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">ICONICASTILL.template10</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="http://iconicastill.com/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://iconicastill.com/portafolio.html">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Mensajes Recibidos</h1>
+
+    {% for mensaje in mensajes %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ mensaje.nombre }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ mensaje.email }} - {{ mensaje.telefono }}</h6>
+                <p class="card-text">{{ mensaje.mensaje }}</p>
+                <p class="card-text"><small class="text-muted">Enviado el {{ mensaje.fecha_envio }}</small></p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No hay mensajes en este momento.</p>
+    {% endfor %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
