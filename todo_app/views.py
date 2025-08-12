@@ -59,6 +59,13 @@ def delete_task(request, task_id):
     return redirect('index')
 # =======================================================
 
+def ver_mensajes(request):
+    """
+    Vista que muestra todos los mensajes de contacto de forma pública.
+    """
+    mensajes = Contacto.objects.all().order_by('-fecha_envio')
+    return render(request, 'todo_app/mensajes.html', {'mensajes': mensajes})
+
 # Vistas para la administración de mensajes
 # =======================================================
 def admin_mensajes(request):
