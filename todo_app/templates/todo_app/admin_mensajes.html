@@ -7,24 +7,52 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Mensajes de Contacto (Administración)</h1>
-    
-    <a href="{% url 'index' %}">Volver a la página de inicio</a>
-    
-    <ul>
-    {% for mensaje in mensajes %}
-        <li style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-            <h3>De: {{ mensaje.nombre }}</h3>
-            <p><strong>Correo:</strong> {{ mensaje.email }}</p>
-            {% if mensaje.telefono %}<p><strong>Teléfono:</strong> {{ mensaje.telefono }}</p>{% endif %}
-            <p><strong>Mensaje:</strong> {{ mensaje.mensaje }}</p>
-            <p><strong>Estado:</strong> {% if mensaje.leido %}✅ Leído{% else %}❌ No leído{% endif %}</p>
-            <p><em>Enviado el {{ mensaje.fecha_envio|date:"d M Y \a \l\a\s H:i" }}</em></p>
-            
-            <a href="{% url 'marcar_como_leido' mensaje.pk %}">Marcar como Leído</a> | 
-            <a href="{% url 'mensaje_borrar' mensaje.pk %}">Borrar</a>
-        </li>
-    {% endfor %}
-    </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">ICONICASTILL.template10</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="http://iconicastill.com/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://iconicastill.com/portafolio.html">Regresar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'ver_mensajes' %}">Ver Mensajes Públicos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Mensajes de Contacto (Administración)</h1>
+        
+        <div class="list-group">
+        {% for mensaje in mensajes %}
+            <div class="list-group-item list-group-item-action d-flex flex-column gap-2 py-3" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">De: {{ mensaje.nombre }}</h5>
+                    <small class="text-muted">Enviado el {{ mensaje.fecha_envio|date:"d M Y \a \l\a\s H:i" }}</small>
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">{{ mensaje.email }} - {{ mensaje.telefono }}</h6>
+                <p class="mb-1">{{ mensaje.mensaje }}</p>
+                <p class="mb-1"><strong>Estado:</strong> {% if mensaje.leido %}✅ Leído{% else %}❌ No leído{% endif %}</p>
+                
+                <div class="d-flex justify-content-end gap-2 mt-2">
+                    <a href="{% url 'marcar_como_leido' mensaje.pk %}" class="btn btn-sm btn-outline-success">Marcar como Leído</a>
+                    <a href="{% url 'mensaje_borrar' mensaje.pk %}" class="btn btn-sm btn-outline-danger">Borrar</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
