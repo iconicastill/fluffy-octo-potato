@@ -109,3 +109,4 @@ CORS_ALLOWED_ORIGINS = [
     'https://app.iconicastill.com'
 ]
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
