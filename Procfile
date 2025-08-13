@@ -1,1 +1,1 @@
-web: gunicorn todo_project.wsgi:application --log-file -
+web: gunicorn --bind 0.0.0.0:$PORT todo_project.wsgi --workers 4
