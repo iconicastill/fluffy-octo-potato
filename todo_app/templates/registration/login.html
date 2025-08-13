@@ -1,0 +1,35 @@
+{% extends "todo_app/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Iniciar Sesión</h3>
+                </div>
+                <div class="card-body">
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            Tu nombre de usuario o contraseña es incorrecto. Por favor, inténtalo de nuevo.
+                        </div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Nombre de usuario</label>
+                            <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="form-control" required="" id="id_username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">Contraseña</label>
+                            <input type="password" name="password" autocomplete="current-password" class="form-control" required="" id="id_password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
