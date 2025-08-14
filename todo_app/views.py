@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_protect
 import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils import timezone # Importar timezone si no lo tienes
 
 # =======================================================
 # VISTAS DE ADMINISTRACIÓN PROTEGIDAS
@@ -137,9 +138,11 @@ def delete_task(request, task_id):
     task.delete()
     return redirect('index')
 
+# ¡VISTA MODIFICADA!
 def ver_mensajes(request):
     """
-    Vista que muestra todos los mensajes de contacto de forma pública.
+    Vista que muestra todos los mensajes de contacto de forma pública, 
+    sin duplicados.
     """
-    mensajes = Contacto.objects.all().order_by('-fecha_envio')
+    mensajes = Contacto.objects.filter(respuesta_a__isnull=True).order_by('-fecha_envio')
     return render(request, 'todo_app/mensajes.html', {'mensajes': mensajes})
