@@ -19,9 +19,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def admin_mensajes(request):
     """
     Vista que muestra todos los mensajes de contacto para la administración.
+    Solo muestra los mensajes originales (que no son respuestas a otros).
     Protegida por @login_required.
     """
-    mensajes = Contacto.objects.all().order_by('-fecha_envio')
+    mensajes = Contacto.objects.filter(respuesta_a__isnull=True).order_by('-fecha_envio')
     return render(request, 'todo_app/admin_mensajes.html', {'mensajes': mensajes})
 
 @login_required
@@ -44,6 +45,32 @@ class MensajeDeleteView(LoginRequiredMixin, DeleteView):
     model = Contacto
     template_name = 'todo_app/mensaje_confirmar_borrar.html'
     success_url = reverse_lazy('admin_mensajes')
+
+@login_required
+def responder_mensaje(request, pk):
+    """
+    Vista para crear una respuesta a un mensaje de contacto.
+    Crea un nuevo objeto de Contacto que está vinculado al mensaje original.
+    """
+    if request.method == 'POST':
+        mensaje_original = get_object_or_404(Contacto, pk=pk)
+        respuesta_texto = request.POST.get('respuesta_mensaje')
+
+        if respuesta_texto:
+            # Crea un nuevo objeto Contacto que es la respuesta
+            nueva_respuesta = Contacto.objects.create(
+                nombre="Administrador",
+                email="admin@iconicastill.com", 
+                mensaje=respuesta_texto,
+                respuesta_a=mensaje_original, 
+                leido=True 
+            )
+            
+            # Opcionalmente, marca el mensaje original como leído
+            mensaje_original.leido = True
+            mensaje_original.save()
+            
+    return redirect('admin_mensajes')
 
 # =======================================================
 # VISTAS GENERALES (no requieren autenticación)
