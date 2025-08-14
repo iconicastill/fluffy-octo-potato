@@ -110,3 +110,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Ajustes de tiempo de sesión
+SESSION_COOKIE_AGE = 3600  # 3600 segundos = 1 hora
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
